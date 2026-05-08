@@ -17,9 +17,11 @@ class LibraryHelper
 
     public function sortByPrice(array $books, string $dir = 'asc'): array
     {
-        usort($books, function ($a, $b) use ($dir) {
-            if ($dir === 'asc') return $a->price <=> $b->price;
-            return $b->price <=> $a->price;
+        $arr_prices = array_map(fn($book) => $book->price, $books);
+
+        usort($arr_prices, function ($a, $b) use ($dir) {
+            if ($dir === 'asc') return $a <=> $b;
+            return $b <=> $a;
         });
         return $books;
     }
@@ -36,7 +38,9 @@ class LibraryHelper
 
     public static function availableBooks(array $books): array
     {
-        return array_filter($books, fn($book) => $book->isAvailable() // $book->stock > 0
-);
+        return array_filter(
+            $books,
+            fn($book) => $book->isAvailable() // $book->stock > 0
+        );
     }
 }
