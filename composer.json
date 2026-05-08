@@ -1,0 +1,11 @@
+{
+    "name": "oseyam/book-library",
+    "description": "Book library PHP assigment",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}
