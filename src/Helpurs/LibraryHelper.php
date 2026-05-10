@@ -36,11 +36,26 @@ class LibraryHelper
         return array_filter($books, fn($book) => stripos($book->title, $kw) !== false || stripos($book->author, $kw) !== false);
     }
 
-    public static function availableBooks(array $books): array
+    public static function availableBooks(array $books): string
     {
-        return array_filter(
-            $books,
-            fn($book) => $book->isAvailable() // $book->stock > 0
-        );
+        $books_srt = "";
+        foreach ($books as $book) {
+            $is_available = $book->isAvailable() ? 'true' : 'false';
+            $books_srt .= "{
+                    'id': {$book->id},
+                    'title': '{$book->title}',
+                    'author': '{$book->author}',
+                    'price': {$book->price},
+                    'stock': {$book->stock},
+                    'available': {$is_available}
+                }";
+        }
+        return ("{
+            'library': {
+                'name': 'PHP Course Sample Library',
+                'version': '1.0',
+                'total_books': 20
+            },
+            'books': [ " . $books_srt . "] }");
     }
 }

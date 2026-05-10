@@ -1,22 +1,22 @@
-<?php 
+<?php
 
 namespace App\Writers;
 
 class ReportWriter
 {
-    public static function write(array $books, string $path): void
+    public static function write(string $books, string $path): void
     {
         $handle = fopen($path, 'w');
 
         if ($handle) {
 
-            foreach ($books as $book) {
+            // foreach ($books as $book) {
 
-                fwrite(
-                    $handle,
-                    $book . PHP_EOL
-                );
-            }
+            fwrite(
+                $handle,
+                $books //. PHP_EOL
+            );
+            // }
 
             fclose($handle);
         }

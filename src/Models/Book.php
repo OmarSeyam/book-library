@@ -5,11 +5,11 @@ namespace App\Models;
 use App\Contracts\Discountable;
 use App\Traits\Timestampable;
 
-class Book implements Discountable 
+class Book implements Discountable
 {
     use Timestampable;
 
-    public function __construct(readonly int $id, public string $title, public string $author, public float $price, public int $stock = 0)
+    public function __construct(readonly int $id, public string $title, public string $author, public float $price, public int $stock = 0, public bool $available = true)
     {
         $this->initTimestamps();
     }
@@ -42,8 +42,8 @@ class Book implements Discountable
         return $this->summary() . " (Created at: {$this->getCreatedAt()})";
     }
 
-    public function applyDiscount(float $pct):float
+    public function applyDiscount(float $pct): float
     {
-        return $this->price * (1 - $pct/100);
+        return $this->price * (1 - $pct / 100);
     }
 }

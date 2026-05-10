@@ -15,7 +15,7 @@ $availableBooks = LibraryHelper::availableBooks($books);
 
 ReportWriter::write(
     $availableBooks,
-    '../../reports/report.txt'
+    '../../reports/library.json'
 );
 
 
